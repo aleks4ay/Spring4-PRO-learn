@@ -1,9 +1,17 @@
 package ua.aleks4ay.example_1;
 
-public class MessageRenderer {
-    private String mass = "Hello world";
+import javax.annotation.Resource;
 
-    void render() {
-        System.out.println(mass);
+public class MessageRenderer {
+    private MessageProvider messageProvider;
+
+    @Resource(name = "messageProvider")
+    public void setMessageProvider(MessageProvider messageProvider) {
+        this.messageProvider = messageProvider;
+    }
+
+    void print() {
+        messageProvider.printName();
+        messageProvider.printMessage();
     }
 }

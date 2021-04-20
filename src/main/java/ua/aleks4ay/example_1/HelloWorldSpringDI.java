@@ -8,6 +8,6 @@ public class HelloWorldSpringDI {
         ctx.load("classpath:/WEB-INF/spring/app-context.xml");
         ctx. refresh ();
         MessageRenderer mr = ctx.getBean("renderer", MessageRenderer.class);
-        mr.render();
+        mr.print();
     }
 }
