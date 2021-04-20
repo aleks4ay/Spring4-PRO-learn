@@ -9,10 +9,11 @@
 
     <context:component-scan base-package="ua.aleks4ay"/>
 
-    <bean id="renderer" class="ua.aleks4ay.example_1.MessageRenderer"/>
+    <bean id="renderer" class="ua.aleks4ay.example_1.MessageRenderer">
+    </bean>
 
     <bean id="messageProvider" class="ua.aleks4ay.example_1.MessageProvider"
-          c:_0="Алексей"
-          c:_1="Привет с большой земли!" />
+          c:_0="#{person.name}"
+          c:_1="I'm #{person.age} years old." />
 
 </beans>
