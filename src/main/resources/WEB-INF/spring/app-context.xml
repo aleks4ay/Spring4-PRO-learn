@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:c="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
@@ -9,11 +10,8 @@
 
     <context:component-scan base-package="ua.aleks4ay"/>
 
-    <bean id="renderer" class="ua.aleks4ay.example_1.MessageRenderer">
-    </bean>
-
-    <bean id="messageProvider" class="ua.aleks4ay.example_1.MessageProvider"
-          c:_0="#{person.name}"
-          c:_1="I'm #{person.age} years old." />
+    <bean id="messProvider" class="ua.aleks4ay.example_1.MessageProvider"
+          c:_0="Aleksander"
+          c:_1="I'm 68 years old." />
 
 </beans>
