@@ -4,17 +4,11 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class HelloWorldSpringDI {
     public static void main(String[] args) {
-        GenericXmlApplicationContext ctxParent = new GenericXmlApplicationContext();
-        ctxParent.load("classpath:WEB-INF/spring/app-context.xml");
-        ctxParent. refresh ();
+        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+        ctx.load("classpath:WEB-INF/spring/app-context.xml");
+        ctx. refresh ();
 
-        GenericXmlApplicationContext ctxChild = new GenericXmlApplicationContext();
-        ctxChild.load("classpath:WEB-INF/spring/app-context-child.xml");
-        ctxChild.setParent(ctxParent);
-        ctxChild. refresh ();
-
-
-        MessageRenderer mr = ctxChild.getBean("renderer", MessageRenderer.class);
-        mr.print();
+        Flat flat = ctx.getBean("flat", Flat.class);
+        flat.getAbiturients().forEach(System.out::println);
     }
 }
