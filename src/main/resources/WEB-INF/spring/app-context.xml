@@ -9,12 +9,8 @@
 
     <context:component-scan base-package="ua.aleks4ay"/>
 
-    <bean id="targetStandart" class="ua.aleks4ay.example_1.ReplacementTarget"/>
+    <bean id="publisher" class="ua.aleks4ay.example_2.Publisher"/>
 
-    <bean id="targetReplaced" class="ua.aleks4ay.example_1.ReplacementTarget">
-        <replaced-method name="formatMessage" replacer="methodReplacer">
-            <arg-type>String</arg-type>
-        </replaced-method>
-    </bean>
-    <bean id="methodReplacer" class="ua.aleks4ay.example_1.FormatMessageReplacer"/>
+    <bean id="messageEventListener" class="ua.aleks4ay.example_2.MessageEventListener"/>
+
 </beans>
