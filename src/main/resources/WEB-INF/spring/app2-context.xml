@@ -9,14 +9,15 @@
        default-lazy-init="true">
 
     <context:component-scan base-package="ua.aleks4ay"/>
+    <context:annotation-config/>
 
     <bean id="simpleBeanl" class="ua.aleks4ay.example_2.SimpleBean"
-        init-method="init" p:name="Aleks" p:age="34"/>
+        p:name="Aleks" p:age="34"/>
 
     <bean id="simpleBean2" class="ua.aleks4ay.example_2.SimpleBean"
-        init-method="init" p:age="38"/>
+        p:age="38"/>
 
     <bean id="simpleBean3" class="ua.aleks4ay.example_2.SimpleBean"
-        init-method="init" p:name="Mikiota"/>
+        p:name="Mikiota"/>
 
 </beans>

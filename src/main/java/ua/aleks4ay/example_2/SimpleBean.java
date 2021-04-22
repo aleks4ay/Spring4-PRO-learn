@@ -1,10 +1,11 @@
 package ua.aleks4ay.example_2;
 
-
 import org.springframework.beans.factory.BeanCreationException;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-public class SimpleBean {
+public class SimpleBean implements InitializingBean, DisposableBean{
     private static final String DEFAULT_NAМE ="Luke Skywalker";
     private String name;
     private int age = Integer.MIN_VALUE;
@@ -12,6 +13,7 @@ public class SimpleBean {
     public static void main(String[] args) {
         GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
         ctx.load("classpath:WEB-INF/spring/app2-context.xml");
+        ctx.registerShutdownHook();//for run destroy when application ends
         ctx.refresh();
         SimpleBean simpleBeanl = getBean("simpleBeanl", ctx);
         SimpleBean simpleBean2 = getBean("simpleBean2", ctx);
@@ -38,7 +40,8 @@ public class SimpleBean {
         this.age = age;
     }
 
-    public void init() {
+    @Override
+    public void afterPropertiesSet() throws Exception {
         System.out.println("Initializing bean");
         if (name == null) {
             System.out.println("Using default name");
@@ -66,5 +69,10 @@ public class SimpleBean {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println("Destroy app...");
     }
 }
