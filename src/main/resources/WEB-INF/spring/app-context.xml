@@ -8,9 +8,4 @@
        https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="ua.aleks4ay"/>
-
-    <bean id="publisher" class="ua.aleks4ay.example_2.Publisher"/>
-
-    <bean id="messageEventListener" class="ua.aleks4ay.example_2.MessageEventListener"/>
-
 </beans>
