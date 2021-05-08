@@ -2,12 +2,12 @@ package ua.aleks4ay.example_4;
 
 import org.springframework.aop.framework.ProxyFactory;
 
-public class HelloWorldAOPExampleWithoutSpring {
+public class HelloWorldAOPExampleSpring {
 
     public static void main(String[] args) {
         MessageWriter messageWriter = new MessageWriter();
         ProxyFactory proxyFactory = new ProxyFactory();
-        proxyFactory.addAdvice(new MessageDecorator());
+        proxyFactory.addAdvice(new MessageDecoratorSpring());
         proxyFactory.setTarget(messageWriter);
         MessageWriter messageWriterProxy = (MessageWriter) proxyFactory.getProxy();
 
