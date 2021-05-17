@@ -1,22 +1,40 @@
 package ua.aleks4ay.jdbc;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 class SimpleContactDao implements ContactDao{
+    private final static String url;
+    private final static String userName;
+    private final static String password;
+    private final static String driverClass;
 
-    static {
+    static  {
+        Properties props = new Properties();
+        String filePropertiesName = "WEB-INF/jdbc/jdbc.properties";
+        try (InputStream in = SimpleContactDao.class.getClassLoader().getResourceAsStream(filePropertiesName)) {
+            props.load(in);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        url = props.getProperty("jdbc.url");
+        userName = props.getProperty("jdbc.userName");
+        password = props.getProperty("jdbc.password");
+        driverClass = props.getProperty("jdbc.driverClassName");
         try {
-            Class.forName("org.postgresql.Driver");
+            Class.forName(driverClass);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:postgresql://localhost:5432/spring4_learn?useSSL=false",
-                "aser", "root1313");
+        return DriverManager.getConnection(url, userName, password);
     }
 
     private void closeConnection(Connection connection){
