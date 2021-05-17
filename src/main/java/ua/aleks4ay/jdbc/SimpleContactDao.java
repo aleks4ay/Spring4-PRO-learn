@@ -107,4 +107,9 @@ class SimpleContactDao implements ContactDao{
             closeConnection(connection);
         }
     }
+
+    @Override
+    public String selectFirstNameById(int id) {
+        return null;
+    }
 }
