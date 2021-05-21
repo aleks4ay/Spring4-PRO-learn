@@ -23,8 +23,12 @@ public class DataSourceConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getRequiredProperty("jdbc.driverClassName"));
         dataSource.setUsername(env.getRequiredProperty("jdbc.userName"));
-        dataSource.setPassword(env.getRequiredProperty("jdbc.password"));
+        dataSource.setPassword(getPassword());
         dataSource.setUrl(env.getRequiredProperty("jdbc.url"));
         return dataSource;
+    }
+
+    private String getPassword(){
+        return Decryptor.decryptString(env.getRequiredProperty("jdbc.password"));
     }
 }
