@@ -2,23 +2,27 @@ package ua.aleks4ay.jdbc;
 
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class JdbcTemplateContactDao implements ContactDao, InitializingBean{
+@Component
+@DependsOn("dataSource")
+public class ContactDaoImpl implements ContactDao, InitializingBean{
     private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate = new JdbcTemplate();
 
-    public void setDataSource(DataSource dataSource) {
+    @Autowired
+    void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
-        JdbcTemplate jdbcTemplate = new JdbcTemplate();
-        jdbcTemplate.setDataSource(dataSource);
-        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override

@@ -1,15 +1,15 @@
 package ua.aleks4ay.jdbc;
 
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.List;
 
 public class AppContext {
     public static void main(String[] args) {
-        GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-        ctx.load("classpath:WEB-INF/jdbc/app-context.xml");
-        ctx.refresh();
-        ContactDao dao = ctx.getBean("contactDao", ContactDao.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext("ua.aleks4ay.jdbc");
+        ContactDao dao = ctx.getBean("contactDaoImpl", ContactDao.class);
+        System.out.println(dao.selectFirstNameById(1));
         List<Contact> contacts = dao.findAll();
         contacts.forEach(System.out::println);
     }
